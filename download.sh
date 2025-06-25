@@ -3,9 +3,11 @@
 export logfile="$(pwd)/dl.log"
 touch $logfile
 
-mkdir -p 666
-cd 666
+if [ ! -d 666 ]; then
+    mkdir -p 666
+fi
 
+cd 666
 
 # asd(){
 #     while true;do
@@ -35,7 +37,7 @@ for i in $1; do
         echo $i
     elif [ $(echo "$i" | grep "https://cn.pornhub.com/model/") ]; then
         ../pornhub_getUserAllVides.sh "$i"
-        u_list=`cat tmp/*.txt`
+        u_list=$(cat tmp/*.txt)
         rm -rf tmp
         cd ..
         ./download.sh "$u_list"
@@ -48,17 +50,17 @@ for i in $1; do
         continue
     elif [ $(echo "$i" | grep "www.xvideos.com") ]; then
         ../xvideos_getUserAllVides.sh "$i"
-        u_list=`cat tmp/*.txt`
+        u_list=$(cat tmp/*.txt)
         rm -rf tmp
         cd ..
         ./download.sh "$u_list"
         continue
     fi
     echo "UA: $3"
-    aria2c -x$2 -U "$3" "$i" >> $logfile 2>&1
+    aria2c -x$2 -U "$3" "$i" >>$logfile 2>&1
 
 done
 
-kill $out_pid >> /dev/null 2>&1
+kill $out_pid >>/dev/null 2>&1
 rm -rf $logfile
-
+cd ..
