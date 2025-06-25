@@ -15,9 +15,14 @@ echo "下载链接：$final_m3m8"
 echo $name
 rm -rf a
 
-ffmpeg -loglevel error -threads 4 -i '$final_m3m8' \
--c:v libx264 -crf 23 -preset veryfast \
--x264-params "frame-threads=4:lookahead-threads=2" \
--c:a aac -b:a 128k -movflags +faststart \
+# ffmpeg -loglevel error -threads 4 -i '$final_m3m8' \
+# -c:v libx264 -crf 23 -preset veryfast \
+# -x264-params "frame-threads=4:lookahead-threads=2" \
+# -c:a aac -b:a 128k -movflags +faststart \
+# "$name.mp4"
+
+ffmpeg -loglevel error -threads 4 -i '$final_m3m8'\
+-c:v copy -c:a copy \  # 直接复制音视频流，跳过编码
+-movflags +faststart \  # 将索引放在文件头部
 "$name.mp4"
 
