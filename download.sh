@@ -9,6 +9,8 @@ fi
 
 cd 666
 
+pwd
+
 # asd(){
 #     while true;do
 #         sleep 5
@@ -28,7 +30,6 @@ for i in $1; do
 
     ((current++))
     echo "Processing item $current/$total_params: $i"
-    pwd
     
     if [ $(echo "$i" | grep "google.com/download") ]; then
         rm -rf dGoogleUrl.sh
