@@ -19,8 +19,8 @@ yt-dlp --concurrent-fragments 8 -o "a.ts" "$i" --no-progress
 # "$final"
 
 ffmpeg -loglevel error -threads 4 -i 'a.ts' \
--c:v copy -c:a copy \  # 直接复制音视频流，跳过编码
--movflags +faststart \  # 将索引放在文件头部
+-c:v copy -c:a copy \
+-movflags +faststart \
 "$final"
 
 rm -rf a.ts*
