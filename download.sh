@@ -42,6 +42,7 @@ for i in $1; do
         rm -rf tmp
         cd ..
         ./download.sh "$u_list"
+        pwd
         continue
     elif [ $(echo "$i" | grep "pornhub.com") ]; then
         ../pornhub.sh "$i"
