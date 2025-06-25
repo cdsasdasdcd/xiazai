@@ -9,8 +9,6 @@ fi
 
 cd 666
 
-pwd
-
 # asd(){
 #     while true;do
 #         sleep 5
@@ -38,6 +36,7 @@ for i in $1; do
         i=$(./dGoogleUrl.sh "$i")
         echo $i
     elif [ $(echo "$i" | grep "https://cn.pornhub.com/model/") ]; then
+        pwd
         ../pornhub_getUserAllVides.sh "$i"
         u_list=$(cat tmp/*.txt)
         rm -rf tmp
@@ -65,4 +64,3 @@ done
 
 kill $out_pid >>/dev/null 2>&1
 rm -rf $logfile
-cd ..
