@@ -65,3 +65,4 @@ done
 
 kill $out_pid >>/dev/null 2>&1
 rm -rf $logfile
+pwd
