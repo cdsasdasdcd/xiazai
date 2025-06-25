@@ -12,10 +12,15 @@ echo "$final"
 rm -rf a.ts*
 yt-dlp --concurrent-fragments 8 -o "a.ts" "$i" --no-progress
 
+# ffmpeg -loglevel error -threads 4 -i 'a.ts' \
+# -c:v libx264 -crf 23 -preset veryfast \
+# -x264-params "frame-threads=4:lookahead-threads=2" \
+# -c:a aac -b:a 128k -movflags +faststart \
+# "$final"
+
 ffmpeg -loglevel error -threads 4 -i 'a.ts' \
--c:v libx264 -crf 23 -preset veryfast \
--x264-params "frame-threads=4:lookahead-threads=2" \
--c:a aac -b:a 128k -movflags +faststart \
+-c:v copy -c:a copy \  # 直接复制音视频流，跳过编码
+-movflags +faststart \  # 将索引放在文件头部
 "$final"
 
 rm -rf a.ts*
