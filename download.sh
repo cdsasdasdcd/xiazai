@@ -55,6 +55,7 @@ for i in $1; do
         rm -rf tmp
         cd ..
         ./download.sh "$u_list"
+        cd 666
         continue
     fi
     echo "UA: $3"
