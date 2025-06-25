@@ -28,7 +28,8 @@ for i in $1; do
 
     ((current++))
     echo "Processing item $current/$total_params: $i"
-
+    pwd
+    
     if [ $(echo "$i" | grep "google.com/download") ]; then
         rm -rf dGoogleUrl.sh
         wget -q https://raw.githubusercontent.com/zhlhlf/text/refs/heads/main/dGoogleUrl.sh
