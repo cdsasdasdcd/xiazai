@@ -1,8 +1,6 @@
 #!/bin/bash
 i="$1"
 
-sudo apt install ffmpeg >>/dev/null 2>&1
-
 curl -sL "$i" > a
 author=`grep html5player.setUploaderName a | cut -d \' -f 2`
 name=`grep html5player.setVideoTitle a | cut -d \' -f 2`
