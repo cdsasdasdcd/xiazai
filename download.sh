@@ -9,17 +9,6 @@ fi
 
 cd 666
 
-# asd(){
-#     while true;do
-#         sleep 5
-#         tail -n 1 $logfile
-#         echo
-#     done
-# }
-
-# asd &
-
-out_pid=$!
 
 current=0
 total_params=$(echo "$1" | wc -w)
@@ -57,11 +46,16 @@ for i in $1; do
         ./download.sh "$u_list"
         cd 666
         continue
+    elif [ ${i: -5} == ".m3u8" ]; then
+        ffmpeg -loglevel error -threads $(nproc) -i "$i" \
+        -c:v copy -c:a copy \
+        -movflags +faststart \
+        "a.mp4"
+        mv "a.mp4" "$(md5sum "a.mp4" | awk '{ print $1 }').mp4"
     fi
-    echo "UA: $3"
-    aria2c -x$2 -U "$3" "$i" >>$logfile 2>&1
+    echo "aria2c  UA: $3"
+    aria2c -x$2 -U "$3" "$i" 
 
 done
 
-kill $out_pid >>/dev/null 2>&1
 rm -rf $logfile
