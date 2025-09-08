@@ -47,7 +47,7 @@ for i in $1; do
         cd 666
         continue
     elif [ ${i: -5} == ".m3u8" ]; then
-        ffmpeg -loglevel error -threads $(nproc) -i "$i" \
+        ffmpeg -loglevel info -threads $(nproc) -i "$i" \
         -c:v copy -c:a copy \
         -movflags +faststart \
         "a.mp4"
