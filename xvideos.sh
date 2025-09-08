@@ -21,7 +21,7 @@ rm -rf a
 # -c:a aac -b:a 128k -movflags +faststart \
 # "$name.mp4"
 
-ffmpeg -loglevel error -threads 4 -i "$final_m3m8" \
+ffmpeg -loglevel error -threads $(nproc) -i "$final_m3m8" \
 -c:v copy -c:a copy \
 -movflags +faststart \
 "$name.mp4"
