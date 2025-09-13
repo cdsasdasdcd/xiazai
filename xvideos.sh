@@ -1,4 +1,7 @@
 #!/bin/bash
+
+install_if_missing ffmpeg 
+
 i="$1"
 
 curl -sL "$i" > a

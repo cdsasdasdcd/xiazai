@@ -1,7 +1,6 @@
 #!/bin/bash
 
 export logfile="$(pwd)/dl.log"
-. utils.sh
 touch $logfile
 
 if [ ! -d 666 ]; then
@@ -10,7 +9,6 @@ fi
 
 cd 666
 
-install_if_missing ffmpeg yt-dlp
 
 current=0
 total_params=$(echo "$1" | wc -w)
@@ -49,6 +47,7 @@ for i in $1; do
         cd 666
         continue
     elif [ ${i: -5} == ".m3u8" ]; then
+        install_if_missing ffmpeg 
         ffmpeg -loglevel info -threads $(nproc) -i "$i" \
         -c:v copy -c:a copy \
         -movflags +faststart \
